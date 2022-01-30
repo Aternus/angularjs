@@ -1,0 +1,33 @@
+{
+  "name": "angularjs",
+  "version": "1.0.0",
+  "description": "Learning AngularJS 1",
+  "private": "true",
+  "scripts": {
+    "build": "webpack",
+    "serve": "webpack serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kiril Reznik",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.8.2",
+    "angular-animate": "^1.8.2",
+    "angular-route": "^1.8.2",
+    "bootstrap": "^4.6.1",
+    "jquery": "^3.6.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/angular": "^1.8.4",
+    "copy-webpack-plugin": "^10.1.0",
+    "css-loader": "^6.5.1",
+    "html-loader": "^3.0.1",
+    "html-webpack-plugin": "^5.5.0",
+    "prettier": "^2.5.1",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.6.0"
+  }
+}
