@@ -1,4 +1,4 @@
-# AngularJS
+# AngularJS - Quick Start Guide (2022)
 
 First, you need to specify which section of the page is controlled by AngularJS.
 
