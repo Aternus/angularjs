@@ -51,3 +51,44 @@ binding.
 
 The `{{ }}` expressions can contain any sort of JavaScript, they print the
 expression's value in HTML.
+
+## Template Syntax
+
+### Conditionals
+
+`ng-show`, `ng-hide`, `ng-if`
+
+### Loops
+
+`ng-repeat`
+
+```html
+<div ng-repeat="artist in artists">
+  <div>{{artist.name}}</div>
+</div>
+```
+
+### Filters
+
+Basic Filters:
+
+- `currency`
+- `number`
+- `date`
+- `lowercase`
+- `uppercase`
+
+Usage:
+
+`{{ exp | filterName }}` passes the value from the expression to `filterName`.
+
+`{{ exp | filterName : arg1 : arg2 }}` passes the value to `filterName` with
+arguments.
+
+```html
+<div>{{artist.name | uppercase}}</div>
+```
+
+## Services
+
+`$http` is a built-in service for making Network calls.
