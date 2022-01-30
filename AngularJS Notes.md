@@ -78,6 +78,12 @@ Basic Filters:
 - `lowercase`
 - `uppercase`
 
+Array Filters:
+
+- `limitTo : qty : start`
+- `filter : keyword`
+- `orderBy : key : reverse`
+
 Usage:
 
 `{{ exp | filterName }}` passes the value from the expression to `filterName`.

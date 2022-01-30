@@ -43,7 +43,7 @@
         <div class="col-12 col-sm-9 col-md-7 col-lg-5">
             <ul class="list-group d-flex"
                 ng-if="query"
-                ng-repeat="artist in artists"
+                ng-repeat="artist in artists | filter: query | orderBy: 'name'"
             >
                 <li class="list-group-item">
 
@@ -53,7 +53,7 @@
                              alt="Photo of {{artist.name}}">
                         <div class="media-body">
                             <h5 class="my-0 text-dark">
-                                {{artist.name | uppercase}}</h5>
+                                {{artist.name}}</h5>
                             <div class="text-secondary font-italic">
                                 {{artist.reknown}}
                             </div>
