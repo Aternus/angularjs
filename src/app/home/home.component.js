@@ -1,14 +1,12 @@
-import angular from 'angular';
 import controller from './home.controller';
 import './home.style.scss';
 import template from './home.template.html';
 
-const componentName = 'home';
-
-angular.module('myApp').component(componentName, {
+export const name = 'home';
+export const options = {
   bindings: controller.bindings,
   controller,
   template,
-});
+};
 
-export default componentName;
+export default { name, options };

@@ -1,10 +1,2 @@
-import angular from 'angular';
-import './components';
+// this file must be imported after the application module have been defined
 import './filters';
-
-// configure the myApp module
-angular.module('myApp').config(function ($routeProvider) {
-  $routeProvider.when('/', {
-    template: '<home></home>',
-  });
-});

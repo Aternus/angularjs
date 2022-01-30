@@ -68,20 +68,20 @@
           ng-repeat="artist in artists | filter: query | orderBy: artistOrder : isReverse"
       >
         <li class="list-group-item">
-
-          <div class="media d-flex align-items-center">
-            <img class="rounded-circle mr-3"
-                 ng-src="images/{{artist.shortname}}_tn.jpg"
-                 alt="Photo of {{artist.name}}">
-            <div class="media-body">
-              <h5 class="my-0 text-dark">
-                {{artist.name}}</h5>
-              <div class="text-secondary font-italic">
-                {{artist.reknown}}
-              </div>
-            </div><!-- media-body -->
-          </div><!-- media -->
-
+          <a href="/#!/artist/{{artist.shortname}}">
+            <div class="media d-flex align-items-center">
+              <img class="rounded-circle mr-3"
+                   ng-src="images/{{artist.shortname}}_tn.jpg"
+                   alt="Photo of {{artist.name}}">
+              <div class="media-body">
+                <h5 class="my-0 text-dark">
+                  {{artist.name}}</h5>
+                <div class="text-secondary font-italic">
+                  {{artist.reknown}}
+                </div>
+              </div><!-- media-body -->
+            </div><!-- media -->
+          </a>
         </li>
       </ul>
     </div><!-- col-12 -->

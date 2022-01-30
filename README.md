@@ -98,3 +98,9 @@ arguments.
 ## Services
 
 `$http` is a built-in service for making Network calls.
+
+## Components
+
+Component names must be defined in camelCase!
+
+Components must be referenced in HTML in kebab-case!

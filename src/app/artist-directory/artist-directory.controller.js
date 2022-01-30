@@ -4,6 +4,8 @@ const EArtistOrder = {
 };
 
 function ArtistDirectoryController($scope, $http) {
+  $scope.artists = [];
+
   $http.get('/data/artists.json').then(function (response) {
     $scope.artists = response.data;
   });
@@ -12,10 +14,6 @@ function ArtistDirectoryController($scope, $http) {
   $scope.artistOrder = EArtistOrder.NAME; // set default order
 }
 
-ArtistDirectoryController.bindings = {
-  artists: '<',
-  artistOrderEnum: '<',
-  artistOrder: '<',
-};
+ArtistDirectoryController.bindings = {};
 
 export default ArtistDirectoryController;
