@@ -1,11 +1,15 @@
-function capitalize() {
+import { capitalize } from 'lodash';
+
+function capitalizeFilter() {
   return function (input) {
     if (typeof input !== 'string') {
       return input;
     }
-    const capitalizedFirstLetter = input.charAt(0).toLocaleUpperCase();
-    return `${capitalizedFirstLetter}${input.slice(1)}`;
+    return capitalize(input);
   };
 }
 
-export default capitalize;
+export default {
+  name: 'capitalize',
+  fn: capitalizeFilter,
+};
