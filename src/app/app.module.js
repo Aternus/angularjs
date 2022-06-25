@@ -12,16 +12,16 @@ const module = angular.module(moduleName, [
   'ngRoute',
   'ngAnimate',
   homeModule,
-  artistModule,
+  artistModule
 ]);
 
 // configure the module
 module.config(function ($routeProvider) {
   $routeProvider.when('/', {
-    template: '<home></home>',
+    template: '<home></home>'
   });
   $routeProvider.when('/artist/:shortname', {
-    template: '<artist></artist>',
+    template: '<artist></artist>'
   });
 });
 

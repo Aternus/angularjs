@@ -1,6 +1,6 @@
 const EArtistOrder = {
   NAME: 'name',
-  REKNOWN: 'reknown',
+  REKNOWN: 'reknown'
 };
 
 function ArtistDirectoryController($scope, $http) {

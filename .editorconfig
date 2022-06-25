@@ -1,12 +1,13 @@
 root = true
 
 [*]
-charset = utf-8
-indent_style = space
-end_of_line = lf
-insert_final_newline = true
-trim_trailing_whitespace = true
 max_line_length = 80
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
 
 [*.{js,jsx}]
 indent_size = 2
@@ -16,3 +17,10 @@ indent_size = 2
 
 [*.{css,scss}]
 indent_size = 2
+
+[{*.html,*.ejs}]
+ij_html_enforce_quotes = true
+ij_html_quote_style = single
+
+[*.md]
+trim_trailing_whitespace = false

@@ -5,47 +5,47 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
   mode: 'development',
   entry: {
-    app: path.resolve(__dirname, 'src', 'index.js'),
+    app: path.resolve(__dirname, 'src', 'index.js')
   },
   devtool: 'inline-source-map',
   devServer: {
     static: path.resolve(__dirname, 'dist'),
-    hot: true,
+    hot: true
   },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Learning AngularJS 1',
-      favicon: path.resolve(__dirname, 'src', 'favicon.ico'),
+      favicon: path.resolve(__dirname, 'src', 'favicon.ico')
     }),
     new CopyWebpackPlugin({
       patterns: [
         {
           from: path.resolve(__dirname, 'public'),
-          to: path.resolve(__dirname, 'dist'),
-        },
-      ],
-    }),
+          to: path.resolve(__dirname, 'dist')
+        }
+      ]
+    })
   ],
   module: {
     rules: [
       {
         test: /\.html/i,
-        loader: 'html-loader',
+        loader: 'html-loader'
       },
       {
         test: /\.(css|scss)$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
-      },
-    ],
+        type: 'asset/resource'
+      }
+    ]
   },
   output: {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
-    clean: true,
+    clean: true
   },
   optimization: {
     moduleIds: 'deterministic',
@@ -55,9 +55,9 @@ module.exports = {
         vendor: {
           test: /node_modules/,
           name: 'vendors',
-          chunks: 'all',
-        },
-      },
-    },
-  },
+          chunks: 'all'
+        }
+      }
+    }
+  }
 };

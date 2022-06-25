@@ -1,4 +1,4 @@
-import { capitalize } from 'lodash';
+import {capitalize} from 'lodash';
 
 function capitalizeFilter() {
   return function (input) {
@@ -11,5 +11,5 @@ function capitalizeFilter() {
 
 export default {
   name: 'capitalize',
-  fn: capitalizeFilter,
+  fn: capitalizeFilter
 };

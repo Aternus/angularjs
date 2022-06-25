@@ -6,7 +6,7 @@ export const name = 'artistDirectory';
 export const options = {
   bindings: controller.bindings,
   controller,
-  template,
+  template
 };
 
-export default { name, options };
+export default {name, options};

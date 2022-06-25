@@ -33,7 +33,7 @@ myApp.controller(
   // controller name
   'myController',
   // controller function receives the $scope by default
-  function MyController($scope) {},
+  function MyController($scope) {}
 );
 ```
 
