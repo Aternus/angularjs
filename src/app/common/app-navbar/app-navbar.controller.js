@@ -1,4 +1,5 @@
-function AppNavbarController($scope, $location) {
+function AppNavbarController($scope, $location, AuthN) {
+  $scope.getCurrentUser = AuthN.getCurrentUser;
   $scope.$location = $location;
 }
 

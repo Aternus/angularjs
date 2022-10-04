@@ -66,9 +66,20 @@
             placeholder="Password"
             ng-required="true"
             ng-model="user.password"
+            ng-minlength="6"
           />
           <label for="password">Password</label>
-          <div class="invalid-feedback">Please insert a password.</div>
+          <div class="invalid-feedback">
+            Please insert a password of at least 6 chars.
+          </div>
+        </div>
+
+        <div
+          ng-if="getRegisterErrorMessage()"
+          class="alert alert-danger"
+          role="alert"
+        >
+          {{ getRegisterErrorMessage() }}
         </div>
 
         <button

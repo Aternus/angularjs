@@ -13,7 +13,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" ng-if="getCurrentUser()">
         <li class="nav-item">
           <a
             ng-class="['nav-link', {'active': $location.path() === '/artists'}]"
@@ -21,6 +21,23 @@
             >Artists</a
           >
         </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            ✋ My Profile
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/#!/logout">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" ng-if="!getCurrentUser()">
         <li class="nav-item">
           <a
             ng-class="['nav-link', {'active': $location.path() === '/login'}]"

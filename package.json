@@ -16,14 +16,12 @@
     "angular": "^1.8.3",
     "angular-animate": "^1.8.3",
     "angular-route": "^1.8.3",
-    "angularfire": "^2.3.0",
     "bootstrap": "^5.2.2",
     "firebase": "^9.10.0",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@types/angular": "^1.8.4",
-    "@types/angularfire": "^0.8.34",
     "@types/node": "^14.18.31",
     "autoprefixer": "^10.4.12",
     "copy-webpack-plugin": "^11.0.0",

@@ -1,10 +1,14 @@
-function RegisterController($scope) {
-  console.log({$scope});
-
-  $scope.user = {};
-  $scope.onRegisterSubmit = function (...args) {
-    console.log($scope.user);
+function RegisterController($scope, AuthN) {
+  $scope.user = {
+    firstName: 'first name',
+    lastName: 'last name',
+    email: 'abc@abc.com',
+    password: '123123'
   };
+  $scope.onRegisterSubmit = async function () {
+    await AuthN.register($scope.user);
+  };
+  $scope.getRegisterErrorMessage = AuthN.getRegisterErrorMessage;
 }
 
 RegisterController.bindings = {};
