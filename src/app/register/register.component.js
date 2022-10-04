@@ -1,11 +1,11 @@
 import angular from 'angular';
-import './artist.style.scss';
-import controller from './artist.controller';
-import template from './artist.template.html';
+import './register.style.scss';
+import controller from './register.controller';
+import template from './register.template.html';
 import appNavbarComponent from '../common/app-navbar/app-navbar.component';
 import appFooterComponent from '../common/app-footer/app-footer.component';
 
-export const componentName = 'artist';
+export const componentName = 'register';
 export const componentOptions = {
   bindings: controller.bindings,
   controller,

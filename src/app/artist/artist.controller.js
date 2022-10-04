@@ -5,6 +5,7 @@ function ArtistController($scope, $routeParams, $http) {
   $scope.nextArtistUrl = undefined;
   $scope.prevArtistUrl = undefined;
   $scope.homeUrl = '/#!/';
+  $scope.artistsUrl = '/#!/artists/';
 
   $http.get('/data/artists.json').then(function (response) {
     const {data} = response;

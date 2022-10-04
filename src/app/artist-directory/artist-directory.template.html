@@ -1,112 +1,96 @@
-<div class="container mt-sm-3">
+<app-navbar></app-navbar>
+
+<div class="container mt-3">
   <div class="row justify-content-center">
-    <div class="col-12 col-md-8 col-lg-6 card">
-      <div class="card-body">
-        <h2 class="card-title text-dark">Artist Directory</h2>
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title">Artist Directory</h1>
 
-        <div class="form-row mb-2">
-          <div class="col">
-            <label class="col-form-label text-right" for="searchQuery"
-              >search
-              <span ng-if="query">for "{{ query }}"</span>
-            </label>
-          </div>
-          <!-- label -->
-
-          <div class="col-12">
+          <div class="form-floating mb-3">
             <input
-              class="form-control form-control-lg"
-              id="searchQuery"
-              placeholder="Search for artists"
-              autofocus
+              type="text"
+              class="form-control"
+              id="query"
+              placeholder="Search query..."
               ng-model="query"
             />
+            <label for="query">Search query</label>
           </div>
-          <!-- col-12 -->
-        </div>
-        <!-- form-row -->
 
-        <div class="form-row">
-          <div class="col">
+          <div class="form-floating mb-2">
             <select
-              class="form-control form-control-inline mr-3 w-100"
-              ng-model="artistOrder"
+              class="form-select"
+              id="artistOrder"
+              aria-label="Sort artists by"
+              ng-model="artistsOrderBy"
             >
-              <option ng-value="artistOrderEnum.NAME">
-                {{artistOrderEnum.NAME | capitalize }}
+              <option ng-value="artistsOrderByEnum.NAME">
+                {{artistsOrderByEnum.NAME | capitalize }}
               </option>
-              <option ng-value="artistOrderEnum.REKNOWN">
-                {{artistOrderEnum.REKNOWN | capitalize }}
+              <option ng-value="artistsOrderByEnum.REKNOWN">
+                {{artistsOrderByEnum.REKNOWN | capitalize }}
               </option>
             </select>
+            <label for="artistOrder">Sort artists by</label>
           </div>
-          <!-- col -->
-          <div class="col-5 col-md-4">
-            <div class="form-check form-check-inline">
-              <label class="form-check-label"
-                ><input
-                  class="form-check-input"
-                  type="radio"
-                  name="isReverse"
-                  checked
-                  ng-model="isReverse"
-                />asc</label
-              >
-            </div>
-            <!-- form-check -->
-            <div class="form-check form-check-inline">
-              <label class="form-check-label">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="isReverse"
-                  value="reverse"
-                  ng-model="isReverse"
-                />desc</label
-              >
-            </div>
-            <!-- form-check -->
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="artistOrderOptions"
+              id="artistOrderASC"
+              ng-model="artistsOrder"
+              value="{{artistsOrderEnum.ASC}}"
+            />
+            <label class="form-check-label" for="artistOrderASC">
+              Ascending
+            </label>
           </div>
-          <!-- col-5 -->
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="artistOrderOptions"
+              id="artistOrderDescending"
+              ng-model="artistsOrder"
+              value="{{artistsOrderEnum.DESC}}"
+            />
+            <label class="form-check-label" for="artistOrderDescending">
+              Descending
+            </label>
+          </div>
         </div>
-        <!-- form-row -->
       </div>
-      <!-- card-body -->
     </div>
-    <!-- col-12 -->
   </div>
-  <!-- row -->
 </div>
-<!-- col-container -->
 
-<div class="artist-list container">
+<div class="container">
   <div class="row justify-content-center">
     <div class="col-12 col-sm-9 col-md-7 col-lg-5">
-      <ul
-        class="list-group d-flex"
-        ng-repeat="artist in artists | filter: query | orderBy: artistOrder : isReverse"
-      >
-        <li class="list-group-item">
+      <ul class="list-group mb-5">
+        <li
+          class="list-group-item"
+          ng-repeat="artist in artists | filter: query | orderBy: artistsOrderBy : (artistsOrder === 'desc')"
+        >
           <a href="/#!/artist/{{artist.shortname}}">
-            <div class="media d-flex align-items-center">
+            <div class="d-flex align-items-center">
               <img
-                class="rounded-circle mr-3"
+                class="d-block rounded-circle me-3"
                 ng-src="images/{{artist.shortname}}_tn.jpg"
                 alt="Photo of {{artist.name}}"
               />
-              <div class="media-body">
-                <h5 class="my-0 text-dark">{{artist.name}}</h5>
-                <div class="text-secondary font-italic">{{artist.reknown}}</div>
+              <div>
+                <h2 class="h5 text-primary">{{artist.name}}</h2>
+                <p class="text-secondary m-0"><i>{{artist.reknown}}</i></p>
               </div>
-              <!-- media-body -->
             </div>
-            <!-- media -->
           </a>
         </li>
       </ul>
     </div>
-    <!-- col-12 -->
   </div>
-  <!-- row -->
 </div>
-<!-- col-container -->
+
+<app-footer></app-footer>

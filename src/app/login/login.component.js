@@ -1,11 +1,11 @@
 import angular from 'angular';
-import './artist.style.scss';
-import controller from './artist.controller';
-import template from './artist.template.html';
+import './login.style.scss';
+import controller from './login.controller';
+import template from './login.template.html';
 import appNavbarComponent from '../common/app-navbar/app-navbar.component';
 import appFooterComponent from '../common/app-footer/app-footer.component';
 
-export const componentName = 'artist';
+export const componentName = 'login';
 export const componentOptions = {
   bindings: controller.bindings,
   controller,

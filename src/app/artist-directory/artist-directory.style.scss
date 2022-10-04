@@ -1,24 +1,22 @@
-.artist-list {
-  line-height: 100%;
-}
+@import '~bootstrap/scss/bootstrap';
 
-.artist-list .list-group-item {
-  padding: 0.3rem 1.5rem;
-}
+.list-group {
+  .list-group-item {
+    &:first-child {
+      border-top: none;
+      border-radius: 0;
+    }
 
-.artist-list .list-group-item:first-child {
-  border-top: none;
-  border-radius: 0;
-}
+    &:hover {
+      background-color: $gray-100;
+    }
 
-.artist-list .list-group-item img {
-  width: 70px;
-}
+    img {
+      width: 70px;
+    }
+  }
 
-.artist-list .list-group-item:hover {
-  background-color: #f8f9fa;
-}
-
-.artist-list a {
-  text-decoration: none;
+  a {
+    text-decoration: none;
+  }
 }

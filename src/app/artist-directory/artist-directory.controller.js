@@ -1,6 +1,11 @@
-const EArtistOrder = {
+const EArtistsOrderBy = {
   NAME: 'name',
   REKNOWN: 'reknown'
+};
+
+const EArtistsOrder = {
+  ASC: 'asc',
+  DESC: 'desc'
 };
 
 function ArtistDirectoryController($scope, $http) {
@@ -10,8 +15,10 @@ function ArtistDirectoryController($scope, $http) {
     $scope.artists = response.data;
   });
 
-  $scope.artistOrderEnum = EArtistOrder;
-  $scope.artistOrder = EArtistOrder.NAME; // set default order
+  $scope.artistsOrderByEnum = EArtistsOrderBy;
+  $scope.artistsOrderBy = EArtistsOrderBy.NAME; // set default order by
+  $scope.artistsOrderEnum = EArtistsOrder;
+  $scope.artistsOrder = EArtistsOrder.ASC; // set default order
 }
 
 ArtistDirectoryController.bindings = {};
