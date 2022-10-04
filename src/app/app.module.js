@@ -5,7 +5,7 @@ import './app.style.scss';
 import artistModule from './artist/artist.module';
 import homeModule from './home/home.module';
 
-const moduleName = 'app';
+export const moduleName = 'app';
 
 // create the module
 const module = angular.module(moduleName, [
@@ -24,5 +24,3 @@ module.config(function ($routeProvider) {
     template: '<artist></artist>'
   });
 });
-
-export default moduleName;
