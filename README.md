@@ -1,5 +1,7 @@
 # AngularJS - Quick Start Guide (2022)
 
+[![View Live Demo](https://img.shields.io/badge/Demo-View_Live_Demo-green)](https://angularjs-364513.web.app/)
+
 First, you need to specify which section of the page is controlled by AngularJS.
 
 This is done by using the `ng-app` directive (command) on an HTML node that is
