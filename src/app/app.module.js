@@ -30,8 +30,10 @@ module.config(function ($routeProvider) {
   });
   $routeProvider.when('/logout', {
     resolveRedirectTo: async function (AuthN) {
-      await AuthN.logout();
-      return '/login';
+      if (await AuthN.logout()) {
+        return '/login';
+      }
+      return '/';
     }
   });
   $routeProvider.when('/register', {
