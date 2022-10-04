@@ -17,6 +17,7 @@
     "angular-animate": "^1.8.3",
     "angular-route": "^1.8.3",
     "bootstrap": "^5.2.2",
+    "firebase": "^9.10.0",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
