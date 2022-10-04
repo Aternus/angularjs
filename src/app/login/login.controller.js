@@ -1,6 +1,10 @@
-function LoginController($scope, $routeParams, $http) {
-  $scope.homeUrl = '/#!/';
-  $scope.registerUrl = `${$scope.homeUrl}register`;
+function LoginController($scope) {
+  console.log({$scope});
+
+  $scope.user = {};
+  $scope.onLoginSubmit = function (...args) {
+    console.log($scope.user);
+  };
 }
 
 LoginController.bindings = {};

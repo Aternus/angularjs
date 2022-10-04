@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/#!/">AngularJS 1</a>
+    <a class="navbar-brand" ng-href="/#!/">AngularJS 1</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -17,21 +17,21 @@
         <li class="nav-item">
           <a
             ng-class="['nav-link', {'active': $location.path() === '/artists'}]"
-            href="/#!/artists"
+            ng-href="/#!/artists"
             >Artists</a
           >
         </li>
         <li class="nav-item">
           <a
             ng-class="['nav-link', {'active': $location.path() === '/login'}]"
-            href="/#!/login"
+            ng-href="/#!/login"
             >Login</a
           >
         </li>
         <li class="nav-item">
           <a
             ng-class="['nav-link', {'active': $location.path() === '/register'}]"
-            href="/#!/register"
+            ng-href="/#!/register"
             >Register</a
           >
         </li>

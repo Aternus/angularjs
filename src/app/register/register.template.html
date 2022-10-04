@@ -3,55 +3,86 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-sm-10 col-md-6">
-      <form>
+      <form name="registerForm" novalidate ng-submit="onRegisterSubmit()">
         <h1 class="h3 my-3 my-md-3 fw-normal">Registration Form</h1>
 
         <div class="form-floating mb-2">
           <input
             type="text"
-            class="form-control"
+            ng-class="['form-control', {
+            'is-valid': registerForm.firstName.$touched && registerForm.firstName.$valid,
+            'is-invalid': registerForm.firstName.$touched && registerForm.firstName.$invalid
+            }]"
             id="firstName"
+            name="firstName"
             placeholder="first name"
-            required
+            ng-required="true"
+            ng-model="user.firstName"
           />
           <label for="firstName">First name</label>
+          <div class="invalid-feedback">Please insert a first name.</div>
         </div>
         <div class="form-floating mb-2">
           <input
             type="text"
-            class="form-control"
+            ng-class="['form-control', {
+            'is-valid': registerForm.lastName.$touched && registerForm.lastName.$valid,
+            'is-invalid': registerForm.lastName.$touched && registerForm.lastName.$invalid
+            }]"
             id="lastName"
+            name="lastName"
             placeholder="last name"
-            required
+            ng-required="true"
+            ng-model="user.lastName"
           />
           <label for="lastName">Last name</label>
+          <div class="invalid-feedback">Please insert a last name.</div>
         </div>
         <div class="form-floating mb-2">
           <input
             type="email"
-            class="form-control"
+            ng-class="['form-control', {
+            'is-valid': registerForm.email.$touched && registerForm.email.$valid,
+            'is-invalid': registerForm.email.$touched && registerForm.email.$invalid
+            }]"
             id="email"
+            name="email"
             placeholder="name@example.com"
-            required
+            ng-required="true"
+            ng-model="user.email"
           />
           <label for="email">Email address</label>
+          <div class="invalid-feedback">Please insert a valid email.</div>
         </div>
         <div class="form-floating mb-2">
           <input
             type="password"
-            class="form-control"
+            ng-class="['form-control', {
+            'is-valid': registerForm.password.$touched && registerForm.password.$valid,
+            'is-invalid': registerForm.password.$touched && registerForm.password.$invalid
+            }]"
             id="password"
+            name="password"
             placeholder="Password"
-            required
+            ng-required="true"
+            ng-model="user.password"
           />
           <label for="password">Password</label>
+          <div class="invalid-feedback">Please insert a password.</div>
         </div>
 
-        <button class="w-100 btn btn-lg btn-primary" type="submit">
+        <button
+          class="w-100 btn btn-lg btn-primary"
+          type="submit"
+          ng-disabled="registerForm.$invalid"
+        >
           Register
         </button>
       </form>
     </div>
+  </div>
+  <div class="row">
+    <p class="text-center my-2 my-md-3">or <a ng-href="/#!/login">Login</a></p>
   </div>
 </div>
 

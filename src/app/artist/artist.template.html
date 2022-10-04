@@ -9,11 +9,13 @@
         >
           <h1 class="card-title my-0">{{artist.name}}</h1>
           <nav class="btn-group">
-            <a class="btn btn-sm btn-secondary" href="{{prevArtistUrl}}"
+            <a class="btn btn-sm btn-secondary" ng-href="{{prevArtistUrl}}"
               >&lt;</a
             >
-            <a class="btn btn-sm btn-secondary" href="{{artistsUrl}}">&bull;</a>
-            <a class="btn btn-sm btn-secondary" href="{{nextArtistUrl}}"
+            <a class="btn btn-sm btn-secondary" ng-href="{{artistsUrl}}"
+              >&bull;</a
+            >
+            <a class="btn btn-sm btn-secondary" ng-href="{{nextArtistUrl}}"
               >&gt;</a
             >
           </nav>
@@ -36,7 +38,7 @@
           <h1 class="card-title my-0">"{{ shortname }}" not found</h1>
         </div>
         <div class="card-body">
-          <a href="{{homeUrl}}" class="btn btn-primary">Go Home</a>
+          <a ng-href="{{homeUrl}}" class="btn btn-primary">Go Home</a>
         </div>
       </div>
     </div>

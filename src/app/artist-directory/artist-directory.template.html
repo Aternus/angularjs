@@ -74,7 +74,7 @@
           class="list-group-item"
           ng-repeat="artist in artists | filter: query | orderBy: artistsOrderBy : (artistsOrder === 'desc')"
         >
-          <a href="/#!/artist/{{artist.shortname}}">
+          <a ng-href="/#!/artist/{{artist.shortname}}">
             <div class="d-flex align-items-center">
               <img
                 class="d-block rounded-circle me-3"
