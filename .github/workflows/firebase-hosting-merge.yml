@@ -18,3 +18,4 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ANGULARJS_364513 }}'
           channelId: live
           projectId: angularjs-364513
+          node-version: '14.x'
