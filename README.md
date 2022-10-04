@@ -101,6 +101,6 @@ arguments.
 
 ## Components
 
-Component names must be defined in camelCase!
+Component names must be defined in `camelCase`!
 
-Components must be referenced in HTML in kebab-case!
+Components must be referenced in HTML in `kebab-case`!
