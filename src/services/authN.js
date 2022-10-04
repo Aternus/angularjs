@@ -3,20 +3,40 @@ import {firebaseApp} from '../firebase';
 import {
   getAuth,
   createUserWithEmailAndPassword,
-  onAuthStateChanged
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut
 } from 'firebase/auth';
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  where,
+  getDocs
+} from 'firebase/firestore';
 
 function AuthN($rootScope) {
   const auth = getAuth(firebaseApp);
+  const db = getFirestore(firebaseApp);
+  const usersCollection = collection(db, 'users');
 
   const state = {
-    currentUser: auth.currentUser,
-    registerErrorMessage: ''
+    currentUser: null,
+    registerErrorMessage: '',
+    loginErrorMessage: ''
   };
 
-  onAuthStateChanged(auth, function authStateChangeHandler(user) {
+  onAuthStateChanged(auth, async function authStateChangeHandler(user) {
     if (user) {
-      state.currentUser = user;
+      const q = query(usersCollection, where('uid', '==', user.uid));
+      const qSnapshot = await getDocs(q);
+      if (qSnapshot.size === 1) {
+        state.currentUser = qSnapshot.docs.pop().data();
+      } else {
+        state.currentUser = null;
+        state.loginErrorMessage = 'Error: something went wrong.';
+      }
     } else {
       state.currentUser = null;
     }
@@ -26,6 +46,7 @@ function AuthN($rootScope) {
   return {
     getCurrentUser,
     getRegisterErrorMessage,
+    getLoginErrorMessage,
     register,
     login,
     logout
@@ -47,12 +68,30 @@ function AuthN($rootScope) {
     }
   }
 
+  function getLoginErrorMessage() {
+    try {
+      return state.loginErrorMessage;
+    } catch (e) {
+      return '';
+    }
+  }
+
   async function register(user) {
     try {
       state.registerErrorMessage = '';
       const {email, password} = user;
-      await createUserWithEmailAndPassword(auth, email, password);
-      state.currentUser = auth.currentUser;
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      await addDoc(usersCollection, {
+        uid: userCredential.user.uid,
+        email: userCredential.user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        createdAt: Date.now()
+      });
     } catch ({code, message}) {
       state.registerErrorMessage = message;
       switch (code) {
@@ -66,9 +105,27 @@ function AuthN($rootScope) {
     $rootScope.$applyAsync();
   }
 
-  function login() {}
+  async function login(user) {
+    try {
+      state.loginErrorMessage = '';
+      const {email, password} = user;
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch ({code, message}) {
+      state.loginErrorMessage = message;
+      switch (code) {
+        default:
+          console.error(code);
+      }
+    }
+    $rootScope.$applyAsync();
+  }
 
-  function logout() {}
+  async function logout() {
+    if (getCurrentUser()) {
+      await signOut(auth);
+      $rootScope.$applyAsync();
+    }
+  }
 }
 
 angular.module('services', []).factory('AuthN', AuthN);

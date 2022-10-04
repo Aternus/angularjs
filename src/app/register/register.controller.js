@@ -1,9 +1,9 @@
 function RegisterController($scope, AuthN) {
   $scope.user = {
-    firstName: 'first name',
-    lastName: 'last name',
-    email: 'abc@abc.com',
-    password: '123123'
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: ''
   };
   $scope.onRegisterSubmit = async function () {
     await AuthN.register($scope.user);

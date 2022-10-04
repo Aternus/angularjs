@@ -45,6 +45,14 @@
           <div class="invalid-feedback">Please insert a password.</div>
         </div>
 
+        <div
+          ng-if="getLoginErrorMessage()"
+          class="alert alert-danger"
+          role="alert"
+        >
+          {{ getLoginErrorMessage() }}
+        </div>
+
         <button
           class="w-100 btn btn-lg btn-primary"
           ng-disabled="loginForm.$invalid"

@@ -28,6 +28,12 @@ module.config(function ($routeProvider) {
   $routeProvider.when('/login', {
     template: `<login></login>`
   });
+  $routeProvider.when('/logout', {
+    resolveRedirectTo: async function (AuthN) {
+      await AuthN.logout();
+      return '/login';
+    }
+  });
   $routeProvider.when('/register', {
     template: '<register></register>'
   });
