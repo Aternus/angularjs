@@ -5,7 +5,7 @@ import './app.style.scss';
 import artistModule from './artist/artist.module';
 import homeModule from './home/home.module';
 
-export const moduleName = 'app';
+export const moduleName = 'angularjsApp';
 
 // create the module
 const module = angular.module(moduleName, [
