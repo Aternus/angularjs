@@ -1,4 +1,4 @@
-function RegisterController($scope, AuthN) {
+function RegisterController($scope, $location, AuthN) {
   $scope.user = {
     firstName: '',
     lastName: '',
@@ -7,6 +7,7 @@ function RegisterController($scope, AuthN) {
   };
   $scope.onRegisterSubmit = async function () {
     await AuthN.register($scope.user);
+    $location.path('/');
   };
   $scope.getRegisterErrorMessage = AuthN.getRegisterErrorMessage;
 }
