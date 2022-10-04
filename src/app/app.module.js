@@ -1,6 +1,7 @@
 import angular from 'angular';
 import 'angular-animate';
 import 'angular-route';
+import 'angularfire';
 import './app.style.scss';
 import loginComponent from './login/login.component';
 import registerComponent from './register/register.component';
@@ -13,6 +14,7 @@ export const moduleName = 'angularjsApp';
 const module = angular.module(moduleName, [
   'ngRoute',
   'ngAnimate',
+  'firebase',
   loginComponent,
   registerComponent,
   artistDirectoryComponent,
