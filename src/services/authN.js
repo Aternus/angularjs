@@ -92,6 +92,7 @@ function AuthN($rootScope) {
         lastName: user.lastName,
         createdAt: Date.now()
       });
+      return true;
     } catch ({code, message}) {
       state.registerErrorMessage = message;
       switch (code) {
@@ -103,6 +104,7 @@ function AuthN($rootScope) {
       }
     }
     $rootScope.$applyAsync();
+    return false;
   }
 
   async function login(user) {
@@ -110,6 +112,7 @@ function AuthN($rootScope) {
       state.loginErrorMessage = '';
       const {email, password} = user;
       await signInWithEmailAndPassword(auth, email, password);
+      return true;
     } catch ({code, message}) {
       state.loginErrorMessage = message;
       switch (code) {
@@ -118,13 +121,16 @@ function AuthN($rootScope) {
       }
     }
     $rootScope.$applyAsync();
+    return false;
   }
 
   async function logout() {
     if (getCurrentUser()) {
       await signOut(auth);
       $rootScope.$applyAsync();
+      return true;
     }
+    return false;
   }
 }
 

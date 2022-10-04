@@ -4,8 +4,9 @@ function LoginController($scope, $location, AuthN) {
     password: ''
   };
   $scope.onLoginSubmit = async function () {
-    await AuthN.login($scope.user);
-    $location.path('/');
+    if (await AuthN.login($scope.user)) {
+      $location.path('/');
+    }
   };
   $scope.getLoginErrorMessage = AuthN.getLoginErrorMessage;
 }

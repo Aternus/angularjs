@@ -6,8 +6,9 @@ function RegisterController($scope, $location, AuthN) {
     password: ''
   };
   $scope.onRegisterSubmit = async function () {
-    await AuthN.register($scope.user);
-    $location.path('/');
+    if (await AuthN.register($scope.user)) {
+      $location.path('/');
+    }
   };
   $scope.getRegisterErrorMessage = AuthN.getRegisterErrorMessage;
 }
