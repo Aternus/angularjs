@@ -3,12 +3,13 @@ function LoginController($scope, $location, AuthN) {
     email: '',
     password: ''
   };
+  $scope.AuthN = AuthN;
+
   $scope.onLoginSubmit = async function () {
     if (await AuthN.login($scope.user)) {
       $location.path('/');
     }
   };
-  $scope.getLoginErrorMessage = AuthN.getLoginErrorMessage;
 }
 
 LoginController.bindings = {};

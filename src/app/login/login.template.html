@@ -46,19 +46,27 @@
         </div>
 
         <div
-          ng-if="getLoginErrorMessage()"
+          ng-if="AuthN.getLoginErrorMessage()"
           class="alert alert-danger"
           role="alert"
         >
-          {{ getLoginErrorMessage() }}
+          {{ AuthN.getLoginErrorMessage() }}
         </div>
 
         <button
           class="w-100 btn btn-lg btn-primary"
-          ng-disabled="loginForm.$invalid"
+          ng-disabled="loginForm.$invalid || AuthN.isProcessing()"
           type="submit"
         >
-          Log in
+          <span ng-if="!AuthN.isProcessing()">Log in</span>
+          <span ng-if="AuthN.isProcessing()"
+            >Processing...
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span
+          ></span>
         </button>
       </form>
     </div>

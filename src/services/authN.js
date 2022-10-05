@@ -23,11 +23,14 @@ function AuthN($rootScope) {
 
   const state = {
     currentUser: null,
+    isProcessing: false,
     registerErrorMessage: '',
     loginErrorMessage: ''
   };
 
   onAuthStateChanged(auth, async function authStateChangeHandler(user) {
+    state.loginErrorMessage = '';
+    state.registerErrorMessage = '';
     if (user) {
       const q = query(usersCollection, where('uid', '==', user.uid));
       const qSnapshot = await getDocs(q);
@@ -35,7 +38,7 @@ function AuthN($rootScope) {
         state.currentUser = qSnapshot.docs.pop().data();
       } else {
         state.currentUser = null;
-        state.loginErrorMessage = 'Error: something went wrong.';
+        state.loginErrorMessage = 'Something went wrong. Please try again.';
       }
     } else {
       state.currentUser = null;
@@ -47,37 +50,31 @@ function AuthN($rootScope) {
     getCurrentUser,
     getRegisterErrorMessage,
     getLoginErrorMessage,
+    isProcessing,
     register,
     login,
     logout
   };
 
   function getCurrentUser() {
-    try {
-      return state.currentUser;
-    } catch (e) {
-      return null;
-    }
+    return state.currentUser;
   }
 
   function getRegisterErrorMessage() {
-    try {
-      return state.registerErrorMessage;
-    } catch (e) {
-      return '';
-    }
+    return state.registerErrorMessage;
   }
 
   function getLoginErrorMessage() {
-    try {
-      return state.loginErrorMessage;
-    } catch (e) {
-      return '';
-    }
+    return state.loginErrorMessage;
+  }
+
+  function isProcessing() {
+    return state.isProcessing;
   }
 
   async function register(user) {
     try {
+      state.isProcessing = true;
       state.registerErrorMessage = '';
       const {email, password} = user;
       const userCredential = await createUserWithEmailAndPassword(
@@ -94,43 +91,63 @@ function AuthN($rootScope) {
       });
       return true;
     } catch ({code, message}) {
-      state.registerErrorMessage = message;
       switch (code) {
         case 'auth/invalid-email':
+          state.registerErrorMessage = 'Invalid email address.';
+          break;
         case 'auth/email-already-in-use':
+          state.registerErrorMessage = 'Email already in use.';
           break;
         case 'auth/weak-password':
+          state.registerErrorMessage =
+            'Weak password. Password length must be at least 6 characters.';
           break;
+        default:
+          state.registerErrorMessage = message;
       }
+      return false;
+    } finally {
+      state.isProcessing = false;
+      $rootScope.$applyAsync();
     }
-    $rootScope.$applyAsync();
-    return false;
   }
 
   async function login(user) {
     try {
+      state.isProcessing = true;
       state.loginErrorMessage = '';
       const {email, password} = user;
       await signInWithEmailAndPassword(auth, email, password);
       return true;
     } catch ({code, message}) {
-      state.loginErrorMessage = message;
       switch (code) {
+        case 'auth/user-not-found':
+          state.loginErrorMessage = 'User not found.';
+          break;
+        case 'auth/wrong-password':
+          state.loginErrorMessage = 'Wrong password.';
+          break;
         default:
-          console.error(code);
+          state.loginErrorMessage = String(message).replace('Firebase:', '');
       }
+      return false;
+    } finally {
+      state.isProcessing = false;
+      $rootScope.$applyAsync();
     }
-    $rootScope.$applyAsync();
-    return false;
   }
 
   async function logout() {
-    if (getCurrentUser()) {
+    try {
+      state.isProcessing = true;
       await signOut(auth);
-      $rootScope.$applyAsync();
       return true;
+    } catch (e) {
+      return false;
+    } finally {
+      state.isProcessing = false;
+      $rootScope.$applyAsync();
     }
-    return false;
   }
 }
 

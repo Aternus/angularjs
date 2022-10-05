@@ -75,19 +75,27 @@
         </div>
 
         <div
-          ng-if="getRegisterErrorMessage()"
+          ng-if="AuthN.getRegisterErrorMessage()"
           class="alert alert-danger"
           role="alert"
         >
-          {{ getRegisterErrorMessage() }}
+          {{ AuthN.getRegisterErrorMessage() }}
         </div>
 
         <button
           class="w-100 btn btn-lg btn-primary"
           type="submit"
-          ng-disabled="registerForm.$invalid"
+          ng-disabled="registerForm.$invalid || AuthN.isProcessing()"
         >
-          Register
+          <span ng-if="!AuthN.isProcessing()">Register</span>
+          <span ng-if="AuthN.isProcessing()"
+            >Processing...
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span
+          ></span>
         </button>
       </form>
     </div>

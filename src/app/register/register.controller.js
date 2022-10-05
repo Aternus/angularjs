@@ -5,12 +5,13 @@ function RegisterController($scope, $location, AuthN) {
     email: '',
     password: ''
   };
+  $scope.AuthN = AuthN;
+
   $scope.onRegisterSubmit = async function () {
     if (await AuthN.register($scope.user)) {
       $location.path('/');
     }
   };
-  $scope.getRegisterErrorMessage = AuthN.getRegisterErrorMessage;
 }
 
 RegisterController.bindings = {};
