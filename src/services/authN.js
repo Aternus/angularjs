@@ -29,8 +29,7 @@ function AuthN($rootScope) {
   };
 
   onAuthStateChanged(auth, async function authStateChangeHandler(user) {
-    state.loginErrorMessage = '';
-    state.registerErrorMessage = '';
+    resetErrorMessages();
     if (user) {
       const q = query(usersCollection, where('uid', '==', user.uid));
       const qSnapshot = await getDocs(q);
@@ -50,6 +49,7 @@ function AuthN($rootScope) {
     getCurrentUser,
     getRegisterErrorMessage,
     getLoginErrorMessage,
+    resetErrorMessages,
     isProcessing,
     register,
     login,
@@ -66,6 +66,11 @@ function AuthN($rootScope) {
 
   function getLoginErrorMessage() {
     return state.loginErrorMessage;
+  }
+
+  function resetErrorMessages() {
+    state.registerErrorMessage = '';
+    state.loginErrorMessage = '';
   }
 
   function isProcessing() {

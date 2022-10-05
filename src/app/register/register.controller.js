@@ -12,6 +12,10 @@ function RegisterController($scope, $location, AuthN) {
       $location.path('/');
     }
   };
+
+  $scope.$on('$destroy', function () {
+    AuthN.resetErrorMessages();
+  });
 }
 
 RegisterController.bindings = {};
