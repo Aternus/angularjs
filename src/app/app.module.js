@@ -14,7 +14,7 @@ angular
   .module(moduleName, [
     'ngRoute',
     'ngAnimate',
-    'services',
+    'angularjsServices',
     loginComponent,
     registerComponent,
     artistDirectoryComponent,

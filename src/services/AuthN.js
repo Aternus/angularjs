@@ -156,4 +156,4 @@ export function AuthN($rootScope) {
   }
 }
 
-angular.module('services').factory('AuthN', AuthN);
+angular.module('angularjsServices').factory('AuthN', AuthN);
