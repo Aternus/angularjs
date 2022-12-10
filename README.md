@@ -107,4 +107,14 @@ Component names must be defined in `camelCase`!
 
 Components must be referenced in HTML in `kebab-case`!
 
+### Components LifeCycle
+
+See https://docs.angularjs.org/guide/component
+
 ## AngularJS and ES2015 (ES6) Syntax
+
+Based on my investigation of AngularJS 1.8 it is now possible to use native
+Classes as constructs for:
+
+- `.controller`
+- `.factory`

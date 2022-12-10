@@ -13,13 +13,13 @@ export default class RegisterController {
     };
   }
 
-  $destroy() {
+  $onDestroy() {
     this.AuthN.resetErrorMessages();
   }
 
-  onRegisterSubmit = async function () {
+  async onRegisterSubmit() {
     if (await this.AuthN.register(this.user)) {
       this.$location.path('/');
     }
-  };
+  }
 }
