@@ -31,12 +31,15 @@ angular
         template: `<login></login>`
       });
       $routeProvider.when('/logout', {
-        resolveRedirectTo: async function (AuthN) {
-          if (await AuthN.logout()) {
-            return '/login';
+        resolveRedirectTo: [
+          'AuthN',
+          async function (AuthN) {
+            if (await AuthN.logout()) {
+              return '/login';
+            }
+            return '/';
           }
-          return '/';
-        }
+        ]
       });
       $routeProvider.when('/register', {
         template: '<register></register>'
