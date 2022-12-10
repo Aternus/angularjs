@@ -16,79 +16,73 @@ import {
   where
 } from 'firebase/firestore';
 
-AuthN.$inject = ['$rootScope'];
+class AuthN {
+  static $inject = ['$rootScope'];
 
-export function AuthN($rootScope) {
-  const auth = getAuth(firebaseApp);
-  const db = getFirestore(firebaseApp);
-  const usersCollection = collection(db, 'users');
+  constructor($rootScope) {
+    this.$rootScope = $rootScope;
+    this.state = {
+      currentUser: null,
+      isProcessing: false,
+      registerErrorMessage: '',
+      loginErrorMessage: ''
+    };
+    this.firebaseDb = getFirestore(firebaseApp);
+    this.firebaseAuth = getAuth(firebaseApp);
+    onAuthStateChanged(this.firebaseAuth, this.authStateChangeHandler);
+  }
 
-  const state = {
-    currentUser: null,
-    isProcessing: false,
-    registerErrorMessage: '',
-    loginErrorMessage: ''
-  };
-
-  onAuthStateChanged(auth, async function authStateChangeHandler(user) {
-    resetErrorMessages();
+  authStateChangeHandler = async (user) => {
+    const usersCollection = collection(this.firebaseDb, 'users');
+    this.resetErrorMessages();
     if (user) {
       const q = query(usersCollection, where('uid', '==', user.uid));
       const qSnapshot = await getDocs(q);
       if (qSnapshot.size === 1) {
-        state.currentUser = qSnapshot.docs.pop().data();
+        this.state.currentUser = qSnapshot.docs.pop().data();
       } else {
-        state.currentUser = null;
-        state.loginErrorMessage = 'Something went wrong. Please try again.';
+        this.state.currentUser = null;
+        this.state.loginErrorMessage =
+          'Something went wrong. Please try again.';
       }
     } else {
-      state.currentUser = null;
+      this.state.currentUser = null;
     }
-    $rootScope.$applyAsync();
-  });
-
-  return {
-    getCurrentUser,
-    getRegisterErrorMessage,
-    getLoginErrorMessage,
-    resetErrorMessages,
-    isProcessing,
-    register,
-    login,
-    logout
+    this.$rootScope.$applyAsync();
   };
 
-  function getCurrentUser() {
-    return state.currentUser;
+  getCurrentUser() {
+    return this.state.currentUser;
   }
 
-  function getRegisterErrorMessage() {
-    return state.registerErrorMessage;
+  getRegisterErrorMessage() {
+    return this.state.registerErrorMessage;
   }
 
-  function getLoginErrorMessage() {
-    return state.loginErrorMessage;
+  getLoginErrorMessage() {
+    return this.state.loginErrorMessage;
   }
 
-  function resetErrorMessages() {
-    state.registerErrorMessage = '';
-    state.loginErrorMessage = '';
+  resetErrorMessages() {
+    this.state.registerErrorMessage = '';
+    this.state.loginErrorMessage = '';
   }
 
-  function isProcessing() {
-    return state.isProcessing;
+  isProcessing() {
+    return this.state.isProcessing;
   }
 
-  async function register(user) {
+  async register(user) {
     try {
-      state.isProcessing = true;
-      state.registerErrorMessage = '';
+      this.state.isProcessing = true;
+      this.state.registerErrorMessage = '';
       const {email, password} = user;
       const userCredential = await createUserWithEmailAndPassword(
-        auth,
+        this.firebaseAuth,
         email,
         password
       );
+      const usersCollection = collection(this.firebaseDb, 'users');
       await addDoc(usersCollection, {
         uid: userCredential.user.uid,
         email: userCredential.user.email,
@@ -100,60 +94,63 @@ export function AuthN($rootScope) {
     } catch ({code, message}) {
       switch (code) {
         case 'auth/invalid-email':
-          state.registerErrorMessage = 'Invalid email address.';
+          this.state.registerErrorMessage = 'Invalid email address.';
           break;
         case 'auth/email-already-in-use':
-          state.registerErrorMessage = 'Email already in use.';
+          this.state.registerErrorMessage = 'Email already in use.';
           break;
         case 'auth/weak-password':
-          state.registerErrorMessage =
+          this.state.registerErrorMessage =
             'Weak password. Password length must be at least 6 characters.';
           break;
         default:
-          state.registerErrorMessage = message;
+          this.state.registerErrorMessage = message;
       }
       return false;
     } finally {
-      state.isProcessing = false;
-      $rootScope.$applyAsync();
+      this.state.isProcessing = false;
+      this.$rootScope.$applyAsync();
     }
   }
 
-  async function login(user) {
+  async login(user) {
     try {
-      state.isProcessing = true;
-      state.loginErrorMessage = '';
+      this.state.isProcessing = true;
+      this.state.loginErrorMessage = '';
       const {email, password} = user;
-      await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(this.firebaseAuth, email, password);
       return true;
     } catch ({code, message}) {
       switch (code) {
         case 'auth/user-not-found':
-          state.loginErrorMessage = 'User not found.';
+          this.state.loginErrorMessage = 'User not found.';
           break;
         case 'auth/wrong-password':
-          state.loginErrorMessage = 'Wrong password.';
+          this.state.loginErrorMessage = 'Wrong password.';
           break;
         default:
-          state.loginErrorMessage = String(message).replace('Firebase:', '');
+          this.state.loginErrorMessage = String(message).replace(
+            'Firebase:',
+            ''
+          );
       }
       return false;
     } finally {
-      state.isProcessing = false;
-      $rootScope.$applyAsync();
+      this.state.isProcessing = false;
+      this.$rootScope.$applyAsync();
     }
   }
 
-  async function logout() {
+  async logout() {
     try {
-      state.isProcessing = true;
-      await signOut(auth);
+      this.state.isProcessing = true;
+      await signOut(this.firebaseAuth);
       return true;
     } catch (e) {
       return false;
     } finally {
-      state.isProcessing = false;
-      $rootScope.$applyAsync();
+      this.state.isProcessing = false;
+      this.$rootScope.$applyAsync();
     }
   }
 }

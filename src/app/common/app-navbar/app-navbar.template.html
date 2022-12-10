@@ -13,10 +13,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul
-        class="navbar-nav me-auto mb-2 mb-lg-0"
-        ng-if="$ctrl.getCurrentUser()"
-      >
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" ng-if="$ctrl.isLoggedIn()">
         <li class="nav-item">
           <a
             ng-class="['nav-link', {'active': $ctrl.$location.path() === '/artists'}]"
@@ -39,10 +36,7 @@
         </li>
       </ul>
 
-      <ul
-        class="navbar-nav me-auto mb-2 mb-lg-0"
-        ng-if="!$ctrl.getCurrentUser()"
-      >
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" ng-if="!$ctrl.isLoggedIn()">
         <li class="nav-item">
           <a
             ng-class="['nav-link', {'active': $ctrl.$location.path() === '/login'}]"

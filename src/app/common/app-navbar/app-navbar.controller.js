@@ -4,11 +4,15 @@ export default class AppNavbarController {
 
   constructor($location, AuthN) {
     this.$location = $location;
-    this.getCurrentUser = AuthN.getCurrentUser;
+    this.AuthN = AuthN;
+  }
+
+  isLoggedIn() {
+    return Boolean(this.AuthN.getCurrentUser());
   }
 
   getFullName() {
-    const currentUser = this.getCurrentUser();
+    const currentUser = this.AuthN.getCurrentUser();
     return `${currentUser.firstName} ${currentUser.lastName}`;
   }
 }
