@@ -1,23 +1,24 @@
-function RegisterController($scope, $location, AuthN) {
-  $scope.user = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: ''
-  };
-  $scope.AuthN = AuthN;
+export default class RegisterController {
+  static bindings = {};
 
-  $scope.onRegisterSubmit = async function () {
-    if (await AuthN.register($scope.user)) {
-      $location.path('/');
+  constructor($location, AuthN) {
+    this.$location = $location;
+    this.AuthN = AuthN;
+    this.user = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: ''
+    };
+  }
+
+  $destroy() {
+    this.AuthN.resetErrorMessages();
+  }
+
+  onRegisterSubmit = async function () {
+    if (await this.AuthN.register(this.user)) {
+      this.$location.path('/');
     }
   };
-
-  $scope.$on('$destroy', function () {
-    AuthN.resetErrorMessages();
-  });
 }
-
-RegisterController.bindings = {};
-
-export default RegisterController;

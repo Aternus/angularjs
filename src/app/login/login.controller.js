@@ -10,13 +10,13 @@ export default class LoginController {
     this.AuthN = AuthN;
   }
 
+  $destroy() {
+    this.AuthN.resetErrorMessages();
+  }
+
   onLoginSubmit = async function () {
     if (await this.AuthN.login(this.user)) {
       this.$location.path('/');
     }
   };
-
-  $destroy() {
-    this.AuthN.resetErrorMessages();
-  }
 }

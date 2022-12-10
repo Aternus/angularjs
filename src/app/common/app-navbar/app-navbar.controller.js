@@ -1,8 +1,8 @@
-function AppNavbarController($scope, $location, AuthN) {
-  $scope.getCurrentUser = AuthN.getCurrentUser;
-  $scope.$location = $location;
+export default class AppNavbarController {
+  static bindings = {};
+
+  constructor($location, AuthN) {
+    this.$location = $location;
+    this.getCurrentUser = AuthN.getCurrentUser;
+  }
 }
-
-AppNavbarController.bindings = {};
-
-export default AppNavbarController;

@@ -8,19 +8,22 @@ const EArtistsOrder = {
   DESC: 'desc'
 };
 
-function ArtistDirectoryController($scope, $http) {
-  $scope.artists = [];
+export default class ArtistDirectoryController {
+  static bindings = {};
 
-  $http.get('/data/artists.json').then(function (response) {
-    $scope.artists = response.data;
-  });
+  constructor($http) {
+    this.$http = $http;
 
-  $scope.artistsOrderByEnum = EArtistsOrderBy;
-  $scope.artistsOrderBy = EArtistsOrderBy.NAME; // set default order by
-  $scope.artistsOrderEnum = EArtistsOrder;
-  $scope.artistsOrder = EArtistsOrder.ASC; // set default order
+    this.artists = [];
+    this.artistsOrderByEnum = EArtistsOrderBy;
+    this.artistsOrderBy = EArtistsOrderBy.NAME; // set default order by
+    this.artistsOrderEnum = EArtistsOrder;
+    this.artistsOrder = EArtistsOrder.ASC; // set default order
+  }
+
+  $onInit() {
+    this.$http.get('/data/artists.json').then(function (response) {
+      this.artists = response.data;
+    });
+  }
 }
-
-ArtistDirectoryController.bindings = {};
-
-export default ArtistDirectoryController;

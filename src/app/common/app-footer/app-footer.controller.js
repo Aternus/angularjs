@@ -1,8 +1,8 @@
-function AppFooterController($scope) {
-  const date = new Date();
-  $scope.currentYear = date.getFullYear();
+export default class AppFooterController {
+  static bindings = {};
+
+  constructor() {
+    const date = new Date();
+    this.currentYear = date.getFullYear();
+  }
 }
-
-AppFooterController.bindings = {};
-
-export default AppFooterController;

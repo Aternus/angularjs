@@ -1,31 +1,36 @@
-function ArtistController($scope, $routeParams, $http) {
-  const {shortname} = $routeParams;
-  $scope.shortname = shortname;
-  $scope.artist = undefined;
-  $scope.nextArtistUrl = undefined;
-  $scope.prevArtistUrl = undefined;
-  $scope.homeUrl = '/#!/';
-  $scope.artistsUrl = '/#!/artists/';
+export default class ArtistController {
+  static bindings = {};
 
-  $http.get('/data/artists.json').then(function (response) {
-    const {data} = response;
-    if (Array.isArray(data)) {
-      const artists = data;
-      const artistIndex = data.findIndex(
-        (artist) => artist.shortname === shortname
-      );
-      const nextArtistIndex =
-        artistIndex + 1 === artists.length ? 0 : artistIndex + 1;
-      const prevArtistIndex =
-        artistIndex - 1 < 0 ? artists.length - 1 : artistIndex - 1;
+  constructor($routeParams, $http) {
+    this.$routeParams = $routeParams;
+    this.$http = $http;
 
-      $scope.artist = artists[artistIndex];
-      $scope.nextArtistUrl = `/#!/artist/${artists[nextArtistIndex]['shortname']}`;
-      $scope.prevArtistUrl = `/#!/artist/${artists[prevArtistIndex]['shortname']}`;
-    }
-  });
+    const {shortname} = this.$routeParams;
+    this.shortname = shortname;
+    this.artist = undefined;
+    this.nextArtistUrl = undefined;
+    this.prevArtistUrl = undefined;
+    this.homeUrl = '/#!/';
+    this.artistsUrl = '/#!/artists/';
+  }
+
+  $onInit() {
+    this.$http.get('/data/artists.json').then(function (response) {
+      const {data} = response;
+      if (Array.isArray(data)) {
+        const artists = data;
+        const artistIndex = data.findIndex(
+          (artist) => artist.shortname === this.shortname
+        );
+        const nextArtistIndex =
+          artistIndex + 1 === artists.length ? 0 : artistIndex + 1;
+        const prevArtistIndex =
+          artistIndex - 1 < 0 ? artists.length - 1 : artistIndex - 1;
+
+        this.artist = artists[artistIndex];
+        this.nextArtistUrl = `/#!/artist/${artists[nextArtistIndex]['shortname']}`;
+        this.prevArtistUrl = `/#!/artist/${artists[prevArtistIndex]['shortname']}`;
+      }
+    });
+  }
 }
-
-ArtistController.bindings = {};
-
-export default ArtistController;
