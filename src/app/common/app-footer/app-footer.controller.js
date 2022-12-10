@@ -1,4 +1,4 @@
-function AppFooterController($scope, $routeParams, $http) {
+function AppFooterController($scope) {
   const date = new Date();
   $scope.currentYear = date.getFullYear();
 }

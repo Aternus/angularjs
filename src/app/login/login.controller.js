@@ -19,3 +19,26 @@ function LoginController($scope, $location, AuthN) {
 LoginController.bindings = {};
 
 export default LoginController;
+
+export class LoginControllerClass {
+  static bindings = {};
+
+  constructor($location, AuthN) {
+    this.user = {
+      email: '',
+      password: ''
+    };
+    this.$location = $location;
+    this.AuthN = AuthN;
+  }
+
+  onLoginSubmit = async function () {
+    if (await this.AuthN.login(this.user)) {
+      this.$location.path('/');
+    }
+  };
+
+  $destroy() {
+    this.AuthN.resetErrorMessages();
+  }
+}

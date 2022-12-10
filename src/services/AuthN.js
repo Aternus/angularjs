@@ -1,22 +1,22 @@
 import angular from 'angular';
 import {firebaseApp} from '../firebase';
 import {
-  getAuth,
   createUserWithEmailAndPassword,
+  getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut
 } from 'firebase/auth';
 import {
-  getFirestore,
-  collection,
   addDoc,
+  collection,
+  getDocs,
+  getFirestore,
   query,
-  where,
-  getDocs
+  where
 } from 'firebase/firestore';
 
-function AuthN($rootScope) {
+export function AuthN($rootScope) {
   const auth = getAuth(firebaseApp);
   const db = getFirestore(firebaseApp);
   const usersCollection = collection(db, 'users');
@@ -156,4 +156,4 @@ function AuthN($rootScope) {
   }
 }
 
-angular.module('services', []).factory('AuthN', AuthN);
+angular.module('services').factory('AuthN', AuthN);

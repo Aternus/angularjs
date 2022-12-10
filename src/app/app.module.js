@@ -10,42 +10,42 @@ import artistComponent from './artist/artist.component';
 export const moduleName = 'angularjsApp';
 
 // create the module
-const module = angular.module(moduleName, [
-  'ngRoute',
-  'ngAnimate',
-  'services',
-  loginComponent,
-  registerComponent,
-  artistDirectoryComponent,
-  artistComponent
-]);
-
-// configure the module
-module.config(function ($routeProvider) {
-  $routeProvider.when('/', {
-    redirectTo: '/artists'
-  });
-  $routeProvider.when('/login', {
-    template: `<login></login>`
-  });
-  $routeProvider.when('/logout', {
-    resolveRedirectTo: async function (AuthN) {
-      if (await AuthN.logout()) {
-        return '/login';
+angular
+  .module(moduleName, [
+    'ngRoute',
+    'ngAnimate',
+    'services',
+    loginComponent,
+    registerComponent,
+    artistDirectoryComponent,
+    artistComponent
+  ])
+  // config the module
+  .config(function ($routeProvider) {
+    $routeProvider.when('/', {
+      redirectTo: '/artists'
+    });
+    $routeProvider.when('/login', {
+      template: `<login></login>`
+    });
+    $routeProvider.when('/logout', {
+      resolveRedirectTo: async function (AuthN) {
+        if (await AuthN.logout()) {
+          return '/login';
+        }
+        return '/';
       }
-      return '/';
-    }
+    });
+    $routeProvider.when('/register', {
+      template: '<register></register>'
+    });
+    $routeProvider.when('/artists', {
+      template: '<artist-directory></artist-directory>'
+    });
+    $routeProvider.when('/artist/:shortname', {
+      template: '<artist></artist>'
+    });
+    $routeProvider.otherwise({
+      redirectTo: '/login'
+    });
   });
-  $routeProvider.when('/register', {
-    template: '<register></register>'
-  });
-  $routeProvider.when('/artists', {
-    template: '<artist-directory></artist-directory>'
-  });
-  $routeProvider.when('/artist/:shortname', {
-    template: '<artist></artist>'
-  });
-  $routeProvider.otherwise({
-    redirectTo: '/login'
-  });
-});

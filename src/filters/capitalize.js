@@ -1,8 +1,8 @@
-import {capitalize} from 'lodash';
+import {capitalize, isString} from 'lodash';
 
 function capitalizeFilter() {
   return function (input) {
-    if (typeof input !== 'string') {
+    if (!isString(input)) {
       return input;
     }
     return capitalize(input);
