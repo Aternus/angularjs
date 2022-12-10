@@ -3,42 +3,46 @@
 <div class="container mt-3">
   <div class="row">
     <div class="col-12">
-      <div class="card" ng-if="artist">
+      <div class="card" ng-if="$ctrl.artist">
         <div
           class="card-header d-flex align-items-start justify-content-between"
         >
-          <h1 class="card-title my-0">{{artist.name}}</h1>
+          <h1 class="card-title my-0">{{$ctrl.artist.name}}</h1>
           <nav class="btn-group">
-            <a class="btn btn-sm btn-secondary" ng-href="{{prevArtistUrl}}"
+            <a
+              class="btn btn-sm btn-secondary"
+              ng-href="{{$ctrl.prevArtistUrl}}"
               >&lt;</a
             >
-            <a class="btn btn-sm btn-secondary" ng-href="{{artistsUrl}}"
+            <a class="btn btn-sm btn-secondary" ng-href="{{$ctrl.artistsUrl}}"
               >&bull;</a
             >
-            <a class="btn btn-sm btn-secondary" ng-href="{{nextArtistUrl}}"
+            <a
+              class="btn btn-sm btn-secondary"
+              ng-href="{{$ctrl.nextArtistUrl}}"
               >&gt;</a
             >
           </nav>
         </div>
         <div class="card-body">
-          <h4 class="card-title text-secondary">{{artist.reknown}}</h4>
+          <h4 class="card-title text-secondary">{{$ctrl.artist.reknown}}</h4>
           <img
             class="float-start me-2 rounded"
-            ng-src="images/{{artist.shortname}}_tn.jpg"
-            alt="Photo of {{artist.name}}"
+            ng-src="images/{{$ctrl.artist.shortname}}_tn.jpg"
+            alt="Photo of {{$ctrl.artist.name}}"
           />
-          <div class="card-text">{{artist.bio}}</div>
+          <div class="card-text">{{$ctrl.artist.bio}}</div>
         </div>
       </div>
 
-      <div class="card" ng-if="!artist">
+      <div class="card" ng-if="!$ctrl.artist">
         <div
           class="card-header d-flex align-items-start justify-content-between"
         >
-          <h1 class="card-title my-0">"{{ shortname }}" not found</h1>
+          <h1 class="card-title my-0">"{{ $ctrl.shortname }}" not found</h1>
         </div>
         <div class="card-body">
-          <a ng-href="{{homeUrl}}" class="btn btn-primary">Go Home</a>
+          <a ng-href="{{$ctrl.homeUrl}}" class="btn btn-primary">Go Home</a>
         </div>
       </div>
     </div>

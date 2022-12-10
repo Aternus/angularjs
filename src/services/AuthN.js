@@ -16,6 +16,8 @@ import {
   where
 } from 'firebase/firestore';
 
+AuthN.$inject = ['$rootScope'];
+
 export function AuthN($rootScope) {
   const auth = getAuth(firebaseApp);
   const db = getFirestore(firebaseApp);

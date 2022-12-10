@@ -21,31 +21,34 @@ angular
     artistComponent
   ])
   // config the module
-  .config(function ($routeProvider) {
-    $routeProvider.when('/', {
-      redirectTo: '/artists'
-    });
-    $routeProvider.when('/login', {
-      template: `<login></login>`
-    });
-    $routeProvider.when('/logout', {
-      resolveRedirectTo: async function (AuthN) {
-        if (await AuthN.logout()) {
-          return '/login';
+  .config([
+    '$routeProvider',
+    function ($routeProvider) {
+      $routeProvider.when('/', {
+        redirectTo: '/artists'
+      });
+      $routeProvider.when('/login', {
+        template: `<login></login>`
+      });
+      $routeProvider.when('/logout', {
+        resolveRedirectTo: async function (AuthN) {
+          if (await AuthN.logout()) {
+            return '/login';
+          }
+          return '/';
         }
-        return '/';
-      }
-    });
-    $routeProvider.when('/register', {
-      template: '<register></register>'
-    });
-    $routeProvider.when('/artists', {
-      template: '<artist-directory></artist-directory>'
-    });
-    $routeProvider.when('/artist/:shortname', {
-      template: '<artist></artist>'
-    });
-    $routeProvider.otherwise({
-      redirectTo: '/login'
-    });
-  });
+      });
+      $routeProvider.when('/register', {
+        template: '<register></register>'
+      });
+      $routeProvider.when('/artists', {
+        template: '<artist-directory></artist-directory>'
+      });
+      $routeProvider.when('/artist/:shortname', {
+        template: '<artist></artist>'
+      });
+      $routeProvider.otherwise({
+        redirectTo: '/login'
+      });
+    }
+  ]);

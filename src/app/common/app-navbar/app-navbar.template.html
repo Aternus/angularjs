@@ -13,10 +13,13 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0" ng-if="getCurrentUser()">
+      <ul
+        class="navbar-nav me-auto mb-2 mb-lg-0"
+        ng-if="$ctrl.getCurrentUser()"
+      >
         <li class="nav-item">
           <a
-            ng-class="['nav-link', {'active': $location.path() === '/artists'}]"
+            ng-class="['nav-link', {'active': $ctrl.$location.path() === '/artists'}]"
             ng-href="/#!/artists"
             >Artists</a
           >
@@ -28,7 +31,7 @@
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-            >✋ My Profile</a
+            >✋ {{$ctrl.getFullName()}}</a
           >
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/#!/logout">Logout</a></li>
@@ -36,17 +39,20 @@
         </li>
       </ul>
 
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0" ng-if="!getCurrentUser()">
+      <ul
+        class="navbar-nav me-auto mb-2 mb-lg-0"
+        ng-if="!$ctrl.getCurrentUser()"
+      >
         <li class="nav-item">
           <a
-            ng-class="['nav-link', {'active': $location.path() === '/login'}]"
+            ng-class="['nav-link', {'active': $ctrl.$location.path() === '/login'}]"
             ng-href="/#!/login"
             >Login</a
           >
         </li>
         <li class="nav-item">
           <a
-            ng-class="['nav-link', {'active': $location.path() === '/register'}]"
+            ng-class="['nav-link', {'active': $ctrl.$location.path() === '/register'}]"
             ng-href="/#!/register"
             >Register</a
           >

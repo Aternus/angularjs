@@ -1,5 +1,6 @@
 export default class LoginController {
   static bindings = {};
+  static $inject = ['$location', 'AuthN'];
 
   constructor($location, AuthN) {
     this.user = {

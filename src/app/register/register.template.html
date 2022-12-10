@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-sm-10 col-md-6">
-      <form name="registerForm" novalidate ng-submit="onRegisterSubmit()">
+      <form name="registerForm" novalidate ng-submit="$ctrl.onRegisterSubmit()">
         <h1 class="h3 my-3 my-md-3 fw-normal">Registration Form</h1>
 
         <div class="form-floating mb-2">
@@ -17,7 +17,7 @@
             name="firstName"
             placeholder="first name"
             ng-required="true"
-            ng-model="user.firstName"
+            ng-model="$ctrl.user.firstName"
           />
           <label for="firstName">First name</label>
           <div class="invalid-feedback">Please insert a first name.</div>
@@ -33,7 +33,7 @@
             name="lastName"
             placeholder="last name"
             ng-required="true"
-            ng-model="user.lastName"
+            ng-model="$ctrl.user.lastName"
           />
           <label for="lastName">Last name</label>
           <div class="invalid-feedback">Please insert a last name.</div>
@@ -49,7 +49,7 @@
             name="email"
             placeholder="name@example.com"
             ng-required="true"
-            ng-model="user.email"
+            ng-model="$ctrl.user.email"
           />
           <label for="email">Email address</label>
           <div class="invalid-feedback">Please insert a valid email.</div>
@@ -65,7 +65,7 @@
             name="password"
             placeholder="Password"
             ng-required="true"
-            ng-model="user.password"
+            ng-model="$ctrl.user.password"
             ng-minlength="6"
           />
           <label for="password">Password</label>
@@ -75,20 +75,20 @@
         </div>
 
         <div
-          ng-if="AuthN.getRegisterErrorMessage()"
+          ng-if="$ctrl.AuthN.getRegisterErrorMessage()"
           class="alert alert-danger"
           role="alert"
         >
-          {{ AuthN.getRegisterErrorMessage() }}
+          {{ $ctrl.AuthN.getRegisterErrorMessage() }}
         </div>
 
         <button
           class="w-100 btn btn-lg btn-primary"
           type="submit"
-          ng-disabled="registerForm.$invalid || AuthN.isProcessing()"
+          ng-disabled="registerForm.$invalid || $ctrl.AuthN.isProcessing()"
         >
-          <span ng-if="!AuthN.isProcessing()">Register</span>
-          <span ng-if="AuthN.isProcessing()"
+          <span ng-if="!$ctrl.AuthN.isProcessing()">Register</span>
+          <span ng-if="$ctrl.AuthN.isProcessing()"
             >Processing...
             <span
               class="spinner-border spinner-border-sm"

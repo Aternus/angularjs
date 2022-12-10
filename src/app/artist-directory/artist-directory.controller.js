@@ -10,6 +10,7 @@ const EArtistsOrder = {
 
 export default class ArtistDirectoryController {
   static bindings = {};
+  static $inject = ['$http'];
 
   constructor($http) {
     this.$http = $http;
@@ -22,7 +23,7 @@ export default class ArtistDirectoryController {
   }
 
   $onInit() {
-    this.$http.get('/data/artists.json').then(function (response) {
+    this.$http.get('/data/artists.json').then((response) => {
       this.artists = response.data;
     });
   }

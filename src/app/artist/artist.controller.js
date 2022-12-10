@@ -1,5 +1,6 @@
 export default class ArtistController {
   static bindings = {};
+  static $inject = ['$routeParams', '$http'];
 
   constructor($routeParams, $http) {
     this.$routeParams = $routeParams;
@@ -15,7 +16,7 @@ export default class ArtistController {
   }
 
   $onInit() {
-    this.$http.get('/data/artists.json').then(function (response) {
+    this.$http.get('/data/artists.json').then((response) => {
       const {data} = response;
       if (Array.isArray(data)) {
         const artists = data;

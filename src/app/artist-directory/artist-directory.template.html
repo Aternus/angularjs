@@ -13,7 +13,7 @@
               class="form-control"
               id="query"
               placeholder="Search query..."
-              ng-model="query"
+              ng-model="$ctrl.query"
             />
             <label for="query">Search query</label>
           </div>
@@ -23,13 +23,13 @@
               class="form-select"
               id="artistOrder"
               aria-label="Sort artists by"
-              ng-model="artistsOrderBy"
+              ng-model="$ctrl.artistsOrderBy"
             >
-              <option ng-value="artistsOrderByEnum.NAME">
-                {{artistsOrderByEnum.NAME | capitalize }}
+              <option ng-value="$ctrl.artistsOrderByEnum.NAME">
+                {{$ctrl.artistsOrderByEnum.NAME | capitalize }}
               </option>
-              <option ng-value="artistsOrderByEnum.REKNOWN">
-                {{artistsOrderByEnum.REKNOWN | capitalize }}
+              <option ng-value="$ctrl.artistsOrderByEnum.REKNOWN">
+                {{$ctrl.artistsOrderByEnum.REKNOWN | capitalize }}
               </option>
             </select>
             <label for="artistOrder">Sort artists by</label>
@@ -40,8 +40,8 @@
               type="radio"
               name="artistOrderOptions"
               id="artistOrderASC"
-              ng-model="artistsOrder"
-              value="{{artistsOrderEnum.ASC}}"
+              ng-model="$ctrl.artistsOrder"
+              value="{{$ctrl.artistsOrderEnum.ASC}}"
             />
             <label class="form-check-label" for="artistOrderASC">
               Ascending
@@ -53,8 +53,8 @@
               type="radio"
               name="artistOrderOptions"
               id="artistOrderDescending"
-              ng-model="artistsOrder"
-              value="{{artistsOrderEnum.DESC}}"
+              ng-model="$ctrl.artistsOrder"
+              value="{{$ctrl.artistsOrderEnum.DESC}}"
             />
             <label class="form-check-label" for="artistOrderDescending">
               Descending
@@ -72,7 +72,7 @@
       <ul class="list-group mb-5">
         <li
           class="list-group-item"
-          ng-repeat="artist in artists | filter: query | orderBy: artistsOrderBy : (artistsOrder === 'desc')"
+          ng-repeat="artist in $ctrl.artists | filter: $ctrl.query | orderBy: $ctrl.artistsOrderBy : ($ctrl.artistsOrder === 'desc')"
         >
           <a ng-href="/#!/artist/{{artist.shortname}}">
             <div class="d-flex align-items-center">

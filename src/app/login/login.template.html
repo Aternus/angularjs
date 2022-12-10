@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-sm-10 col-md-6">
-      <form name="loginForm" novalidate ng-submit="onLoginSubmit()">
+      <form name="loginForm" novalidate ng-submit="$ctrl.onLoginSubmit()">
         <img
           class="d-block my-4 my-md-5 mx-auto"
           ng-src="/images/bootstrap-logo.svg"
@@ -23,7 +23,7 @@
             id="email"
             name="email"
             placeholder="name@example.com"
-            ng-model="user.email"
+            ng-model="$ctrl.user.email"
             ng-required="true"
           />
           <label for="email">Email address</label>
@@ -38,7 +38,7 @@
             id="password"
             name="password"
             placeholder="Password"
-            ng-model="user.password"
+            ng-model="$ctrl.user.password"
             ng-required="true"
           />
           <label for="password">Password</label>
@@ -46,20 +46,20 @@
         </div>
 
         <div
-          ng-if="AuthN.getLoginErrorMessage()"
+          ng-if="$ctrl.AuthN.getLoginErrorMessage()"
           class="alert alert-danger"
           role="alert"
         >
-          {{ AuthN.getLoginErrorMessage() }}
+          {{ $ctrl.AuthN.getLoginErrorMessage() }}
         </div>
 
         <button
           class="w-100 btn btn-lg btn-primary"
-          ng-disabled="loginForm.$invalid || AuthN.isProcessing()"
+          ng-disabled="loginForm.$invalid || $ctrl.AuthN.isProcessing()"
           type="submit"
         >
-          <span ng-if="!AuthN.isProcessing()">Log in</span>
-          <span ng-if="AuthN.isProcessing()"
+          <span ng-if="!$ctrl.AuthN.isProcessing()">Log in</span>
+          <span ng-if="$ctrl.AuthN.isProcessing()"
             >Processing...
             <span
               class="spinner-border spinner-border-sm"
