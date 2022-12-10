@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "build:clean": "rm -rf ./dist",
-    "serve": "webpack serve",
+    "serve": "webpack serve --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Kiril Reznik",
